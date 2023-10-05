@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
+using System.Data;
 using users;
 using static GradesProjectFB.Dto;
 
@@ -50,9 +51,24 @@ namespace GradesProject.Controllers
                 connect.connection.Open();
                 string sql = $"SELECT * FROM users WHERE Id={Id}";
                 MySqlCommand command = new MySqlCommand(sql, connect.connection);
-                command.ExecuteNonQuery();
-                connect.connection.Close();
-                return StatusCode(200, grades);
+                MySqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    var item = new GradesDto(
+                       reader.GetGuid("Id"),
+                       reader.GetInt32("Grades"),
+                       reader.GetString("Description"),
+                       reader.GetString("Created")
+                        );
+                    connect.connection.Close();
+                    return StatusCode(200, item);
+                }
+                else
+                {
+                    Exception e = new Exception();
+                    connect.connection.Close();
+                    return StatusCode(404, e.Message);
+                }
 
             }
             catch (Exception e)
@@ -87,6 +103,32 @@ namespace GradesProject.Controllers
                 return BadRequest(e.Message);
             }
         }
-
+        [HttpPut]
+        public ActionResult<GradesDto> Put(Guid Id, UpdateGrade update) 
+        {
+            DateTime dateTime = DateTime.Now;
+            string time = dateTime.ToString("yyyy-MM-dd HH:mm:ss");
+            var grades = new Grade
+            {
+                Id = Guid.NewGuid(),
+                Grades = update.Grades,
+                Description = update.Description,
+                Created = time
+            };
+            try
+            {
+                connect.connection.Open();
+                string sql = $"UPDATE `grades` SET `Grades`='{grades.Grades}',`Description`='{grades.Description}' WHERE `Id`='{Id}'";
+                MySqlCommand command = new MySqlCommand(sql, connect.connection);
+                command.ExecuteNonQuery();
+                connect.connection.Close();
+                return StatusCode(201,grades);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+            
+        }
     }
 }

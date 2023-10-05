@@ -16,7 +16,7 @@ namespace users
             Host = "127.0.0.1";
             DbName = "jegyek";
             UserName = "root";
-            Password = "password";
+            Password = "";
 
             //ConnectionString = "Host="+Host+";Database="+DbName+";User="+UserName+";Password="+Password+";SslMode=none";
 
