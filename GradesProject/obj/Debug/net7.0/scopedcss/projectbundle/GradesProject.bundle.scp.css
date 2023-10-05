@@ -1,0 +1,49 @@
+/* _content/GradesProject/Pages/Shared/_Layout.cshtml.rz.scp.css */
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-ihptnn94yl] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-ihptnn94yl] {
+  color: #0077cc;
+}
+
+.btn-primary[b-ihptnn94yl] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-ihptnn94yl], .nav-pills .show > .nav-link[b-ihptnn94yl] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top[b-ihptnn94yl] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-ihptnn94yl] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-ihptnn94yl] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-ihptnn94yl] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-ihptnn94yl] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}

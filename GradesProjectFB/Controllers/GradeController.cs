@@ -1,9 +1,9 @@
-﻿using GradesProject.Models;
+﻿using GradesProjectFB.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
-using static GradesProject.Dto;
 using users;
+using static GradesProjectFB.Dto;
 
 namespace GradesProject.Controllers
 {
@@ -43,7 +43,7 @@ namespace GradesProject.Controllers
             }
         }
         [HttpGet("{id}")]
-        public ActionResult<GradesDto> Get(Guid Id) 
+        public ActionResult<GradesDto> Get(Guid Id)
         {
             try
             {
@@ -61,7 +61,7 @@ namespace GradesProject.Controllers
             }
         }
         [HttpPost]
-        public ActionResult<GradesDto> Post(CreateGrade createGrade) 
+        public ActionResult<GradesDto> Post(CreateGrade createGrade)
         {
             DateTime dateTime = DateTime.Now;
             string time = dateTime.ToString("yyyy-MM-dd HH:mm:ss");
@@ -76,10 +76,10 @@ namespace GradesProject.Controllers
             {
                 connect.connection.Open();
                 string sql = $"INSERT INTO `grades`(`Id`, `Grades`, `Description`, `Created`) VALUES ('{grade.Id}','{grade.Grades}','{grade.Description}','{grade.Created}')";
-                MySqlCommand command = new MySqlCommand(sql, connect.connection);                 
+                MySqlCommand command = new MySqlCommand(sql, connect.connection);
                 command.ExecuteNonQuery();
                 connect.connection.Close();
-                return StatusCode(201,grade);
+                return StatusCode(201, grade);
 
             }
             catch (Exception e)
