@@ -77,7 +77,7 @@ namespace GradesProject.Controllers
             }
         }
         [HttpPost]
-        public ActionResult<GradesDto> Post(CreateGrade createGrade)
+        public ActionResult<Grade> Post(CreateGrade createGrade)
         {
             DateTime dateTime = DateTime.Now;
             string time = dateTime.ToString("yyyy-MM-dd HH:mm:ss");
@@ -104,16 +104,12 @@ namespace GradesProject.Controllers
             }
         }
         [HttpPut]
-        public ActionResult<GradesDto> Put(Guid Id, UpdateGrade update) 
+        public ActionResult Put(Guid Id, UpdateGrade update) 
         {
-            DateTime dateTime = DateTime.Now;
-            string time = dateTime.ToString("yyyy-MM-dd HH:mm:ss");
             var grades = new Grade
             {
-                Id = Guid.NewGuid(),
                 Grades = update.Grades,
-                Description = update.Description,
-                Created = time
+                Description = update.Description
             };
             try
             {
@@ -130,5 +126,7 @@ namespace GradesProject.Controllers
             }
             
         }
+        [HttpDelete]
+        public ActionResult<GradesDto> Delete(Guid Id) { return StatusCode(200); }
     }
 }
